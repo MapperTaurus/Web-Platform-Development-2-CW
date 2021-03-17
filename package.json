@@ -1,0 +1,20 @@
+{
+  "name": "webplatformdevelopment",
+  "version": "1.0.0",
+  "description": "CW1 Database",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mustache-express": "^1.3.0",
+    "nedb": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nedb"
+  ],
+  "author": "IT",
+  "license": "ISC"
+}
