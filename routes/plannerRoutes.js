@@ -16,7 +16,11 @@ router.get("/plan", function(req, res) {
     res.sendFile(path.join(pages, '/plan.html'));
 })
 
-router.get("/achievements", controller.achievements_page);
+//router.get("/achievements", controller.achievements_page);
+
+router.get("/achievements", function(req, res) {
+    res.sendFile(path.join(pages, '/achievements.html'));
+})
 
 router.get("/about", function(req, res) {
     res.sendFile(path.join(pages, '/about.html'));

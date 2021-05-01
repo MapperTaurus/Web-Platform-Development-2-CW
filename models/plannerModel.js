@@ -14,7 +14,7 @@ class Planner {
         }
     }
 
-    init() {
+    init() { 
         this.db.insert({
             achievementName: 'Golden Plank',
             achievementDescription: 'Hold a three-minute plank',
@@ -57,7 +57,7 @@ class Planner {
             achieved: '2021-03-02',
             user: 'Emily'
         });
-        console.log('Database entries inserted!');
+        console.log('Database entries inserted!'); 
 
         // Remove the "Golden Plank" Achievement
         /*

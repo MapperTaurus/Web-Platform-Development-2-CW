@@ -13,7 +13,7 @@ exports.landing_page = function(req, res) {
 }
 
 exports.achievements_page = function(req, res) {
-    db.init();
+    //db.init();
     db.getAllEntries().then((list)=>{
         res.render('entries', {
             'title': 'Achievements 🏆',
