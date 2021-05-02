@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of Entries</title>
+{{> partials/header}}
 </head>
-<body>
-    <h2>{{title}}</h2>
-    {{#entries}}
-    <div>{{user}}</div>
-    <div>{{achievementName}}</div>
-    <hr>
-
-    {{/entries}}
-    {{^entries}}
-    No entries found!
-    {{/entries}}
+<body class="container">
+<h1>{{title}}</h1>
+<h2>Training Schedule</h2>
+ 
+<form method="post" role="form" action="">
+  <div class="form-group">
+    <label for="user">User</label>
+    <input type="text" class="form-control" id="user"
+           name="user" value="{{user}}" placeholder="Username" required>
+  </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title"
+           name="title" placeholder="Workout title" required>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description" name="description"
+              rows="4" cols="50" placeholder="Enter the details of your workout here." required>
+    </textarea>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Post entry" class="btn btn-primary">
+  </div>
+</form>
 </body>
 </html>

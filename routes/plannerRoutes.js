@@ -16,11 +16,13 @@ router.get("/plan", function(req, res) {
     res.sendFile(path.join(pages, '/plan.html'));
 })
 
-//router.get("/achievements", controller.achievements_page);
+router.get("/achievements", controller.achievements_page);
 
+/* 
 router.get("/achievements", function(req, res) {
     res.sendFile(path.join(pages, '/achievements.html'));
-})
+}) 
+*/
 
 router.get("/about", function(req, res) {
     res.sendFile(path.join(pages, '/about.html'));
@@ -32,10 +34,11 @@ router.use(function(req, res) {
     res.send('Error:404 Page Not Found!');   
  })
 
+ /*
 router.use(function(err, req, res, next ) {
     res.status(500);
     res.type('text/plan');
     res.send('Error:500 Internal Server Error!');  
  }) 
-
+*/
 module.exports = router;

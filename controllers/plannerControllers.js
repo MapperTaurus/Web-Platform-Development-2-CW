@@ -12,11 +12,21 @@ exports.landing_page = function(req, res) {
    // db.init();
 }
 
+exports.post_new_entry = function(req, res) {
+    //console.log('processing post-new_entry controller');
+    if (!req.body.subject || !req.body.contents) {
+        res.status(400).send("Entries must have a title and content.");
+        return;
+    }
+    db.addEntry(req.body.author, req.body.subject, req.body.contents);
+    res.redirect('/');
+}
+
 exports.achievements_page = function(req, res) {
     //db.init();
     db.getAllEntries().then((list)=>{
         res.render('entries', {
-            'title': 'Achievements 🏆',
+            'title': 'Training Schedule 📅',
             'entries': list 
         });
         console.log('Promise Resolved');

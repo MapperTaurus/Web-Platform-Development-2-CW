@@ -85,6 +85,24 @@ class Planner {
          
          
     }
+
+    addEntry(title, description, completed) {
+
+        var entry = {
+            title: title,
+            description: description,
+            completed: completed,
+            published: new Date().toISOString().split('T')[0]
+        }
+
+        this.db.insert(entry, function(err, doc) {
+            if (err) {
+                console.log('Error inserting document', subject);
+            }
+        })
+
+    }
+
     
     // Display all achievements (both in terminal and achievements page)
     getAllEntries() {
