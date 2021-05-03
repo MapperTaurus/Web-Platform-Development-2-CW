@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-{{> partials/header}}
+    {{> partials/header}}
 </head>
+
 <body class="container">
-<h1>{{title}}</h1>
-<h2>Training Schedule</h2>
- 
-<form method="post" role="form" action="">
-  <div class="form-group">
-    <label for="user">User</label>
-    <input type="text" class="form-control" id="user"
-           name="user" value="{{user}}" placeholder="Username" required>
-  </div>
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title"
-           name="title" placeholder="Workout title" required>
-  </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea class="form-control" id="description" name="description"
-              rows="4" cols="50" placeholder="Enter the details of your workout here." required>
-    </textarea>
-  </div>
-  <div class="form-group">
-    <input type="submit" value="Post entry" class="btn btn-primary">
-  </div>
-</form>
+    <h1>{{title}}</h1>
+    {{> partials/buttons}}
+           {{^user}}
+           📅 Create an accout in just a few seconds to keep track of your personal training routines. Already have an account? 
+                  </br>
+       Log in instead.
+                    {{/user}}
+    {{#user}}  
+    <i>Remember <b>{{user}}</b>, you have to push harder today if you want a different tomorrow </i>🔥
+    {{#entries}}
+    <div class="card" data-id="{{id}}">
+        <div class="card-header">
+            {{workout_title}}
+        </div>
+        <div class="card-body">
+            <div class="card-text">
+                {{contents}}
+            </div>
+                <div class="date">
+                Scheduled for: {{date}}
+            </div>
+            <div class="card-text">
+                Written by <a href="/posts/{{user}}">{{user}} </a>, on {{published}}
+            </div>
+                <a href='/delete/{{_id}}'  alt='Delete this workout' style="color:#dc3545"><i class="fas fa-trash"></i> Delete</a> 
+        </div>
+    </div>
+    {{/entries}} {{^entries}} No scheduled workouts yet. Why don't you add some? {{/entries}}
+    {{/user}}
 </body>
+
 </html>

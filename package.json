@@ -1,20 +1,27 @@
 {
-  "name": "webplatformdevelopment",
+  "name": "webplatformdevelopmentcw",
   "version": "1.0.0",
-  "description": "CW1 Database",
+  "description": "Web Platform Development 2 Coursework",
   "main": "index.js",
-  "dependencies": {
-    "express": "^4.17.1",
-    "mustache-express": "^1.3.0",
-    "nedb": "^1.8.0"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+    "node.js",
+    "express",
     "nedb"
   ],
-  "author": "IT",
-  "license": "ISC"
+  "author": "Ivan Todorov",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "connect-ensure-login": "^0.1.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mustache-express": "^1.3.0",
+    "nedb": "^1.8.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  }
 }

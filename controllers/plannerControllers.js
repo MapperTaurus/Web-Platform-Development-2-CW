@@ -1,36 +1,115 @@
-const plannerDAO = require('../models/plannerModel');
-const db = new plannerDAO();
-const controller = require ('../controllers/plannerControllers');
+const scheduleDAO = require('../models/plannerModel');
+const userDao = require('../models/profilesModel.js');
+const db = new scheduleDAO();
+db.init();
 
 
-exports.vincents_entries = function(req, res) {
-    res.send('<h1>Processing Vincent\'s Entries, see terminal</h1>');
+exports.entries_list = function(req, res) {
+    db.getAllEntries();
+}
+
+exports.post_new_user = function(req, res) {
+    const user = req.body.username;
+    const password = req.body.pass;
+
+    if (!user || !password) {
+        res.status(401).send('no user or no password supplied');
+        return;
+    }
+
+    userDao.lookup(user, function(err, u) {
+        if (u) {
+            res.status(401).send("The username already exists. Please use a different username!");
+            return;
+        }
+        userDao.create(user, password);
+        res.redirect('/');
+    });
+
+
+}
+
+exports.show_user_entries = function(req, res) {
+
+    let user = req.params.user;
+    db.getEntriesByUser(user)
+        .then((entries) => {
+            res.render("entries", {
+                "title": "🏋️Progress Tracking",
+                'user': req.user,
+                "entries": entries
+            });
+        })
+        .catch((err) => {
+            console.log('Error: Could not perceive any recorded workouts!')
+            console.log(JSON.stringify(err))
+        });
+}
+
+exports.delete_entry = function(req, res) {
+//WIP
+    let workout_title = req.workout_title;
+    db.getEntriesByUser(workout_title)
 }
 
 exports.landing_page = function(req, res) {
-    res.send('<h1>Welcome to Progress Tracking</h1> <br/> <h2>Homepage</h2>');
-   // db.init();
+
+    db.getAllEntries().then((list) => {
+        res.render('entries', {
+            'title': '🏋️Progress Tracking',
+            'entries': list,
+            "user": req.user
+        });
+    }).catch((err) => {
+        console.log('Promise rejected', err);
+    })
 }
 
 exports.post_new_entry = function(req, res) {
-    //console.log('processing post-new_entry controller');
-    if (!req.body.subject || !req.body.contents) {
-        res.status(400).send("Entries must have a title and content.");
+    if (!req.body.workout_title || !req.body.contents) {
+        res.status(400).send("Error: Entries must have a title and content!");
         return;
     }
-    db.addEntry(req.body.author, req.body.subject, req.body.contents);
+    db.addEntry(req.body.user, req.body.workout_title, req.body.contents, req.body.date);
     res.redirect('/');
 }
 
-exports.achievements_page = function(req, res) {
-    //db.init();
-    db.getAllEntries().then((list)=>{
-        res.render('entries', {
-            'title': 'Training Schedule 📅',
-            'entries': list 
-        });
-        console.log('Promise Resolved');
-    }).catch((err) => {
-        console.log('Could NOT resolve the promise', err);
+exports.show_register_page = function(req, res) {
+    res.render("register", {
+        "title": '🏋️Progress Tracking'
+    });
+}
+
+exports.show_login_page = function(req, res) {
+    res.render('login', {
+        'title': '🏋️Progress Tracking'
     })
+}
+
+exports.show_new_entries = function(req, res) {
+    res.render('newEntry', {
+        'title': '🏋️Progress Tracking',
+        'user': req.user.user
+    })
+}
+
+exports.post_login = function(req, res) {
+    res.redirect('/');
+}
+
+exports.logout = function(req, res) {
+    req.logout();
+    res.redirect("/");
+}
+
+exports.server_error = function(err, req, res, next) {
+    res.status(500);
+    res.type('text/plain');
+    res.send('Error 500: Internal Server Error!');
+}
+
+exports.not_found = function(err, req, res, next) {
+    res.status(404);
+    res.type('text/plain');
+    res.send('Error 404: Page not found!');
 }

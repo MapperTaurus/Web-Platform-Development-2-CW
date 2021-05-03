@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+{{> partials/header}}
+</head>
+<body class="container">
+<h1>{{title}}</h1>
+        <div class="text-right" style="margin-bottom: 1em;">      
+            <a href="/" class="btn btn-secondary">Home</a>
+        </div>
+<h3>📅 Schedule your cardio and strength training routines by filling in the form</h3>
+ 
+<form method="post" role="form" action="">
+  <div class="form-group">
+    <label for="user">User</label>
+    <input type="text" class="form-control" id="user"
+           name="user" value="{{user}}" placeholder="Written by" required>
+  </div>
+  <div class="form-group">
+    <label for="workout_title">Workout Title</label>
+    <input type="text" class="form-control" id="workout_title"
+           name="workout_title" placeholder="" required">
+  </div>
+  <div class="form-group">
+    <label for="contents">Message</label>
+    <textarea class="form-control" id="contents" name="contents"
+              placeholder="Enter your comment here." rows="3" required>
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input type="date" class="form-control" id="date"
+           name="date" placeholder="Schedule Date">
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Post entry" class="btn btn-success">
+  </div>
+</form>
+</body>
+</html>

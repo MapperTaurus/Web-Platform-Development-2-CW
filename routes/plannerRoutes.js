@@ -2,43 +2,50 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const pages = path.join(__dirname, `pages`);
+const auth = require('../auth/auth');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const controller = require ('../controllers/plannerControllers');
+
 
 router.use(express.static(pages));
 
-router.get("/", controller.landing_page);
+router.get('/', controller.landing_page);
 
-router.get("/index", function(req, res) {
-    res.send('<h1>Testing something </h1>');
-})
+router.get('/shedule', controller.entries_list);
 
-router.get("/plan", function(req, res) {
-    res.sendFile(path.join(pages, '/plan.html'));
-})
+router.get('/new', ensureLoggedIn('/login'), controller.show_new_entries);
 
-router.get("/achievements", controller.achievements_page);
+router.post('/new', ensureLoggedIn('/login'), controller.post_new_entry);
 
-/* 
-router.get("/achievements", function(req, res) {
-    res.sendFile(path.join(pages, '/achievements.html'));
-}) 
-*/
+router.get('/posts/:user', controller.show_user_entries);
 
 router.get("/about", function(req, res) {
     res.sendFile(path.join(pages, '/about.html'));
 })
 
-router.use(function(req, res) {
-    res.status(400);
-    res.type('text/plan');
-    res.send('Error:404 Page Not Found!');   
- })
+router.get('/login', controller.show_login_page);
 
- /*
-router.use(function(err, req, res, next ) {
+router.post('/login', auth.userize('/login'), controller.post_login);
+
+router.get('/register', controller.show_register_page);
+
+router.post('/register', controller.post_new_user);
+
+router.get('/logout', controller.logout);
+
+router.get('/delete/:id', controller.delete_entry); 
+
+
+router.use(function(req, res) {
+    res.status(404);
+    res.type('text/plain');
+    res.send('404 Not found.');
+})
+
+router.use(function(err, req, res, next) {
     res.status(500);
-    res.type('text/plan');
-    res.send('Error:500 Internal Server Error!');  
- }) 
-*/
+    res.type('text/plain');
+    res.send('Internal Server Error.');
+})
+
 module.exports = router;

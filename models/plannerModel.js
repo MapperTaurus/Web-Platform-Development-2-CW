@@ -1,122 +1,108 @@
 const Datastore = require('nedb');
-const nedb = require('nedb');
-const db = new nedb({filename: 'schedule.db', autoload: true});
 
-class Planner {
+class Schedule {
 
-    constructor (dbFilePath) {
-        if(dbFilePath) {
-            // Embedded Database (if the argument is present)
-            this.db = new Datastore({filename:dbFilePath, autoload: true});
+    //call the constructor with the db name for embedded use and without it for in-memory use
+    constructor(dbFilePath) {
+        if (dbFilePath) {
+            //embedded
+            this.db = new Datastore({ filename: dbFilePath, autoload: true });
         } else {
-            //  In-memory Database (if there is NOT any argument)
+            //in memory 
             this.db = new Datastore();
         }
     }
 
-    init() { 
+    //insert initial entries in the databse
+    init() {
         this.db.insert({
-            achievementName: 'Golden Plank',
-            achievementDescription: 'Hold a three-minute plank',
-            achieved: '2021-03-11',
-            user: 'Vincent'
+            workout_title: 'I liked the exhibition',
+            contents: 'nice',
+            date: '03.05.2021',
+            published: '2020-04-16',
+            user: 'Martin'
         });
-        this.db.insert({
-            achievementName: 'Silver Plank',
-            achievementDescription: 'Hold a two-minute plank',
-            achieved: '2021-03-09',
-            user: 'Emily'
-        });
-        this.db.insert({
-            achievementName: 'Bronze Plank',
-            achievementDescription: 'Hold a minute plank',
-            achieved: '2021-03-08',
-            user: 'Francis'
-        });
-        this.db.insert({
-            achievementName: 'Silver Butterfly Stretch',
-            achievementDescription: 'Stay in Seated Butterfly Stretch for three minutes',
-            achieved: '2021-03-06',
-            user: 'Vincent'
-        });
-        this.db.insert({
-            achievementName: 'Bronze Plank',
-            achievementDescription: 'Hold a minute plank',
-            achieved: '2021-03-02',
-            user: 'Emily'
-        });
-        this.db.insert({
-            achievementName: 'Golden Butterfly Stretch',
-            achievementDescription: 'Stay in Seated Butterfly Stretch for ten minutes',
-            achieved: '2021-03-02',
-            user: 'Francis'
-        });
-        this.db.insert({
-            achievementName: 'Bronze Butterfly Stretch',
-            achievementDescription: 'Stay in Seated Butterfly Stretch for a minute',
-            achieved: '2021-03-02',
-            user: 'Emily'
-        });
-        console.log('Database entries inserted!'); 
 
-        // Remove the "Golden Plank" Achievement
-        /*
-        this.db.remove({ achievementName: 'Golden Plank'}, function(err, numDocs) {
-            if (err) {
-                console.log('Database Error: Could NOT delete the entry!', err);
-            }
-            else {
-                console.log(numDocs, 'Entries deleted');
-            }
-        }) 
-        */
-
-        // Find all achievements for user Vincent
-        /*
-          this.db.find({ user: 'Vincent'}, function(err, docs) {
-            if (err) {
-               console.log('Database Error: Could NOT retrieve any entries!', err);
-            } else {
-               console.log ('Entries retrieved for user Vincent:');
-               console.log(docs);
-            }
-         })
-         */
-         
-         
+        this.db.insert({
+            workout_title: "Didn't like it",
+            contents: 'A really terrible style!',
+            date: '08.05.2021',
+            published: '2021-04-18',
+            user: 'Ann'
+        });
     }
 
-    addEntry(title, description, completed) {
+    //return all entries from the database
+    getAllEntries() {
+        //return a Promise object, which can be resolved or rejected
+        return new Promise((resolve, reject) => {
+            //use the find() function of the database to get the data, 
+            //with error first callback function, err for error, entries for data
+            this.db.find({}, function(err, entries) {
+                //if error occurs reject Promise
+                if (err) {
+                    reject(err);
+                    //if no error resolve the promise and return the data
+                } else {
+                    resolve(entries);
+                }
+            })
+        })
+    }
+
+    addEntry(user, workout_title, contents, date) {
 
         var entry = {
-            title: title,
-            description: description,
-            completed: completed,
+            user: user,
+            workout_title: workout_title,
+            contents: contents,
+            date: date,
             published: new Date().toISOString().split('T')[0]
         }
 
         this.db.insert(entry, function(err, doc) {
             if (err) {
-                console.log('Error inserting document', subject);
+                console.log('Error inserting document', workout_title);
             }
         })
 
     }
-    
-    // Display all achievements (both in terminal and achievements page)
-    getAllEntries() {
+
+
+    getEntriesByUser(userName) {
         return new Promise((resolve, reject) => {
-            this.db.find({}, function(err, entries) {
+            this.db.find({ 'user': userName }, function(err, entries) {
                 if (err) {
                     reject(err);
-                    console.log('Database Error: Could NOT retrieve any entries!', err);
                 } else {
                     resolve(entries);
-                    console.log('Displaying all entries:', entries);
                 }
-            })
+            });
         })
-    } 
+    }
+
+    getEntriesByID(id) {
+        return new Promise((resolve, reject) => {
+            this.db.find({ 'user': id }, function(err, entries) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(entries);
+                }
+            });
+        })
+    }
+
+    deleteEntry(workout_title) {
+        this.db.remove({_workout_title: workout_title}, {}, function(err, rem) {
+            if (err) {
+            console.log("error in deleteEntry", err);
+            } else {
+            console.log("rem, ’ entries deleted");
+            }
+            })
+            } 
+
 }
 
-module.exports = Planner;
+module.exports = Schedule;
