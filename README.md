@@ -15,32 +15,10 @@ git archive --format=tar --remote=ssh://hostname/user/reponame.git branch:folder
 npm install git-download --save
 ```
 
-# Usage
+# Start-up
 
 ```
-var options = {
-  // Remote source location (no github sources)
-  source: 'ssh://git@bitbucket.org/dgkang/node-buffer.git',
-  // Destination for exploded files from downloaded tar file
-  dest: '/tmp/node-buffer',
-  // Branch and folder path to include, such as 'master:lib'
-  branch: 'master',
-  // Location to save tarfile, defaults to /tmp if not specified
-  tarfile: '/tmp/node-buffer.tar'
-};
-
-var download = require('git-download');
-
-download(options, function(err, tarfile) {
-  if (err) {
-    console.error('Error occurred downloading '+options.source);
-    return;
-  }
-  console.log('Successfully downloaded '+options.source);
-  if (tarfile) {
-    console.log('Output: '+tarfile);
-  }
-});
+node index.js
 ```
 
 # Options

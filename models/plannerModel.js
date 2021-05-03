@@ -102,7 +102,6 @@ class Planner {
         })
 
     }
-
     
     // Display all achievements (both in terminal and achievements page)
     getAllEntries() {
