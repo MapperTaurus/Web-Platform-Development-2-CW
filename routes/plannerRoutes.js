@@ -33,7 +33,7 @@ router.post('/register', controller.post_new_user);
 
 router.get('/logout', controller.logout);
 
-router.get('/delete/:id', controller.delete_entry); 
+router.get('/delete/:id', controller.deleteEntry); 
 
 
 router.use(function(req, res) {

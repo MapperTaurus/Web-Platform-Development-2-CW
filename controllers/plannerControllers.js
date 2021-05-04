@@ -46,21 +46,9 @@ exports.show_user_entries = function(req, res) {
         });
 }
 
-exports.delete_entry = function(req, res) {
-
-    let user = req.params.user;
-    db.getEntriesByUser(user)
-        .then((entries) => {
-            res.render("entries", {
-                "title": "🏋️Progress Tracking",
-                'user': req.user,
-                "entries": entries
-            });
-        })
-        .catch((err) => {
-            console.log('Error: Could not perceive any recorded workouts!')
-            console.log(JSON.stringify(err))
-        });
+exports.deleteEntry = function(req, res) {
+    db.deleteEntry(id = req.params.id)
+    res.redirect('/')
 }
 
 exports.landing_page = function(req, res) {

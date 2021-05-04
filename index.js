@@ -16,7 +16,7 @@ app.set('view engine', 'mustache');
 
 app.use(express.urlencoded({ extended: false }));
 
-app.use(session({ secret: 'dont tell anyone', resave: false, saveUninitialized: false }));
+app.use(session({ secret: 'generic-secret41239118', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -1,11 +1,11 @@
     <div class="text-right" style="margin-bottom: 1em;">
     {{^user}}
-        <a id="login" href="/login" class="btn btn-secondary">Login</a>
-        <a id="register" href="/register" class="btn btn-primary">Register</a> 
+        <a id="login" href="/login" class="btn btn-secondary"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a id="register" href="/register" class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</a> 
     {{/user}}
 
     {{#user}}        
-        <a href="/new" class="btn btn-success">Schedule new workout</a>
-        <a id="logout" href="/logout" class="btn btn-danger">Sign out</a> 
+        <a href="/new" class="btn btn-success"><i class="fas fa-calendar-plus"></i> Schedule new workout</a>
+        <a id="logout" href="/logout" class="btn btn-danger"> <i class="fas fa-sign-out-alt"></i> Sign out</a> 
     {{/user}}
     </div>
