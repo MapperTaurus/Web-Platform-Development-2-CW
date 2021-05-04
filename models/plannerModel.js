@@ -107,7 +107,7 @@ class Schedule {
     }
 
     deleteEntry(id) {
-        this.db.remove({_id: id}, {}, function(err, rem) {
+        this.db.remove({_id: id}, function(err, rem) {
             if (err) {
             console.log("error in deleteEntry", err);
             } else {
@@ -115,6 +115,18 @@ class Schedule {
             }
             })
             } 
+
+        // Remove the "Golden Plank" Achievement
+        /*
+        this.db.remove({ achievementName: 'Golden Plank'}, function(err, numDocs) {
+            if (err) {
+                console.log('Database Error: Could NOT delete the entry!', err);
+            }
+            else {
+                console.log(numDocs, 'Entries deleted');
+            }
+        }) 
+        */
 
 }
 
