@@ -14,23 +14,35 @@ class Schedule {
     }
 
     //insert initial entries in the databse
+    //DISCLAIMER: training goals and achievements are private for each profile, these 3 entries are used just as an example!!!
     init() {
         this.db.insert({
-            workout_title: 'I liked the exhibition',
-            contents: 'nice',
-            date: '03.05.2021',
-            published: '2020-04-16',
+            workout_title: 'Chest and back',
+            goals: 'Judo push-up x5, Cable Pulldowns x10, Barbell Incline Press x15, Barbell Bent Over Row x15, Push Ups x20, Hip Thrust x10 ',
+            achievements: 'Judo push-up x2, Cable Pulldowns x5, Barbell Incline Press x10, Barbell Bent Over Row x12, Push Ups x18, Hip Thrust x10',
+            date: '2021-05-02',
+            published: '2021-04-16',
             user: 'Martin'
         });
 
         this.db.insert({
-            workout_title: "Didn't like it",
-            contents: 'A really terrible style!',
-            date: '08.05.2021',
+            workout_title: "Arm and shoulder",
+            goals: 'Bench press x10, Bent-over row x5, Lat pull-down x15, One-arm cable press x10, Incline dumbbell flye x20',
+            achievements: 'Bench press x8, Bent-over row x5, Lat pull-down x11, One-arm cable press x10, Incline dumbbell flye x12',
+            date: '2021-05-06',
             published: '2021-04-18',
-            user: 'Ann'
+            user: 'Vincent'
         });
-    }
+
+        this.db.insert({
+            workout_title: "Cardio",
+            goals: 'High knees x20, Butt kicks x20, Lateral shuffles x15, Speed skaters x15, Jumping jacks x20, Toe taps x10, Squat jumps x25',
+            achievements: 'High knees x25, Butt kicks x25, Lateral shuffles x10, Speed skaters x5, Jumping jacks x20, Toe taps x10, Squat jumps x20',
+            date: '2021-05-16',
+            published: '2021-04-24',
+            user: 'Vincent'
+        });
+}
 
     //return all entries from the database
     getAllEntries() {
@@ -50,12 +62,13 @@ class Schedule {
         })
     }
 
-    addEntry(user, workout_title, contents, date) {
+    addEntry(user, workout_title, goals, achievements, date) {
 
         var entry = {
             user: user,
             workout_title: workout_title,
-            contents: contents,
+            goals: goals,
+            achievements: achievements,
             date: date,
             published: new Date().toISOString().split('T')[0]
         }
@@ -93,8 +106,8 @@ class Schedule {
         })
     }
 
-    deleteEntry(workout_title) {
-        this.db.remove({_workout_title: workout_title}, {}, function(err, rem) {
+    deleteEntry(id) {
+        this.db.remove({_id: id}, {}, function(err, rem) {
             if (err) {
             console.log("error in deleteEntry", err);
             } else {

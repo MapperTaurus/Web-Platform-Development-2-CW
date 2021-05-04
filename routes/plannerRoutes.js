@@ -41,11 +41,11 @@ router.use(function(req, res) {
     res.type('text/plain');
     res.send('404 Not found.');
 })
-
+/*
 router.use(function(err, req, res, next) {
     res.status(500);
     res.type('text/plain');
     res.send('Internal Server Error.');
 })
-
+*/
 module.exports = router;

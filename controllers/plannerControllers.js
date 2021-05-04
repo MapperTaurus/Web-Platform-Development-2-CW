@@ -48,8 +48,8 @@ exports.show_user_entries = function(req, res) {
 
 exports.delete_entry = function(req, res) {
 //WIP
-    let workout_title = req.workout_title;
-    db.getEntriesByUser(workout_title)
+    let id = req.id;
+    db.getEntriesByUser(id)
 }
 
 exports.landing_page = function(req, res) {
@@ -66,11 +66,11 @@ exports.landing_page = function(req, res) {
 }
 
 exports.post_new_entry = function(req, res) {
-    if (!req.body.workout_title || !req.body.contents) {
-        res.status(400).send("Error: Entries must have a title and content!");
+    if (!req.body.workout_title || !req.body.goals) {
+        res.status(400).send("Error: Entries must have a title and goals!");
         return;
     }
-    db.addEntry(req.body.user, req.body.workout_title, req.body.contents, req.body.date);
+    db.addEntry(req.body.user, req.body.workout_title, req.body.goals, req.body.achievements, req.body.date);
     res.redirect('/');
 }
 
@@ -101,13 +101,13 @@ exports.logout = function(req, res) {
     req.logout();
     res.redirect("/");
 }
-
+/*
 exports.server_error = function(err, req, res, next) {
     res.status(500);
     res.type('text/plain');
     res.send('Error 500: Internal Server Error!');
 }
-
+*/
 exports.not_found = function(err, req, res, next) {
     res.status(404);
     res.type('text/plain');

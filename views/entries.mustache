@@ -18,21 +18,27 @@
     {{#entries}}
     <div class="card" data-id="{{id}}">
         <div class="card-header">
-            {{workout_title}}
+            <p style="font-size:24px;"> {{workout_title}} </p>
         </div>
         <div class="card-body">
             <div class="card-text">
-                {{contents}}
+                <i class="fas fa-bullseye"></i> Goals: {{goals}}
+                </br>
+               <i class="fas fa-trophy"></i> Achievements: {{achievements}}
             </div>
                 <div class="date">
-                Scheduled for: {{date}}
+                <i class="fas fa-calendar-week"></i> Scheduled for: {{date}}
             </div>
             <div class="card-text">
-                Written by <a href="/posts/{{user}}">{{user}} </a>, on {{published}}
+                <i class="fas fa-user"></i> Scheduled by <a href="/posts/{{user}}">{{user}} </a>, on {{published}}
             </div>
-                <a href='/delete/{{_id}}'  alt='Delete this workout' style="color:#dc3545"><i class="fas fa-trash"></i> Delete</a> 
+            <hr>
+                <a href='/edit/{{_id}}'  alt='Edit this workout' style="color:#007bff"><i class="fas fa-edit"></i> Edit</a>       
+                <a href='/delete/{{_workout_title}}'  alt='Delete this workout' style="color:#dc3545"><i class="fas fa-trash"></i> Delete</a> 
         </div>
     </div>
+        </br>
+        </br>
     {{/entries}} {{^entries}} No scheduled workouts yet. Why don't you add some? {{/entries}}
     {{/user}}
 </body>
