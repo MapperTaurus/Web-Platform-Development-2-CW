@@ -35,6 +35,8 @@ router.get('/logout', controller.logout);
 
 router.get('/delete/:id', controller.deleteEntry); 
 
+router.get('/share/:id', controller.shareEntry);
+
 
 router.use(function(req, res) {
     res.status(404);

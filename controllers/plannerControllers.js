@@ -100,6 +100,20 @@ exports.logout = function(req, res) {
     req.logout();
     res.redirect("/");
 }
+
+exports.shareEntry = function(req, res) {
+
+    db.getEntriesByID(id = req.params.id).then((list) => {
+        res.render('entries', {
+            'title': '🏋️Progress Tracking',
+            'entries': list,
+            "user": req.user
+        });
+    }).catch((err) => {
+        console.log('Promise rejected', err);
+    })
+}
+
 /*
 exports.server_error = function(err, req, res, next) {
     res.status(500);

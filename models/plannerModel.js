@@ -96,7 +96,7 @@ class Schedule {
 
     getEntriesByID(id) {
         return new Promise((resolve, reject) => {
-            this.db.find({ 'user': id }, function(err, entries) {
+            this.db.find({ _id: id }, function(err, entries) {
                 if (err) {
                     reject(err);
                 } else {
