@@ -5,7 +5,9 @@
 <body class="container">
 <h1>{{title}}</h1>
         <div class="text-right" style="margin-bottom: 1em;">      
-            <a href="/" class="btn btn-secondary"><i class="fas fa-home"></i> Home</a>
+            <a href="/" class="btn btn-secondary"><i class="fas fa-certificate"></i> Dashboard</a>
+            <a href="/new" class="btn btn-success"><i class="fas fa-calendar-plus"></i> Schedule new workout</a>
+            <a id="logout" href="/logout" class="btn btn-danger"> <i class="fas fa-sign-out-alt"></i> Sign out</a> 
         </div>
 <h3>📅 Schedule your cardio and strength training routines by filling in the form</h3>
  
@@ -22,21 +24,29 @@
   </div>
   <div class="form-group">
     <label for="goals">Training Goals</label>
-    <textarea class="form-control" id="goals" name="goals" rows="3" required>
+    <textarea class="form-control" id="goals" name="goals" rows="3" placeholder="Training Goals" required>
     </textarea>
   </div>
   <div class="form-group">
     <label for="achievements">Achievements</label>
-    <textarea class="form-control" id="achievements" name="achievements" rows="3" required>
+    <textarea class="form-control" id="achievements" name="achievements" rows="3" placeholder="Achievements" required>
     </textarea>
   </div>
   <div class="form-group">
     <label for="date">Date</label>
     <input type="date" class="form-control" id="date"
            name="date" placeholder="Schedule Date">
+  <div class="form-group">
+    </br>
+    <label for="status">Status:</label>
+    <select for="status" name="status" id="status">
+    <option  value="⏰Scheduled">Sheduled</option>
+    <option  value="✅Completed">Completed</option> 
+    </select>
+  </div>
   </div>
   <div class="form-group">
-    <input type="submit" value="Post entry" class="btn btn-success">
+    <input type="submit" value="Submit Workout" class="btn btn-success">
   </div>
 </form>
 </body>

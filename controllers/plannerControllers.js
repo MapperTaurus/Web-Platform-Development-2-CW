@@ -52,15 +52,8 @@ exports.deleteEntry = function(req, res) {
 }
 
 exports.editEntry = function(req, res) {
-    db.getEntriesByID(id = req.params.id).then((list) => {
-        res.render('entries', {
-            'title': '🏋️Progress Tracking',
-            'entries': list,
-            "user": req.user
-        });
-    }).catch((err) => {
-        console.log('Promise rejected', err);
-    })
+    db.editEntry(id = req.params.id)
+    res.redirect('/')
 }
 
 exports.landing_page = function(req, res) {
@@ -76,12 +69,13 @@ exports.landing_page = function(req, res) {
     })
 }
 
-exports.post_new_entry = function(req, res) {
-    if (!req.body.workout_title || !req.body.goals) {
-        res.status(400).send("Error: Entries must have a title and goals!");
+exports.post_new_entry = function(req, res) 
+{
+    if (!req.body.workout_title && (!req.body.goals || req.body.achievements)) {
+        res.status(400).send("Error when submitting: Please fill in all the required fields!");
         return;
     }
-    db.addEntry(req.body.user, req.body.workout_title, req.body.goals, req.body.achievements, req.body.date);
+    db.addEntry(req.body.user, req.body.workout_title, req.body.goals, req.body.achievements, req.body.date, req.body.status);
     res.redirect('/');
 }
 
@@ -119,20 +113,34 @@ exports.shareEntry = function(req, res) {
         res.render('entries', {
             'title': '🏋️Progress Tracking',
             'entries': list,
-            "user": req.user
+            "user": req.user,
+            'shareDisplay': "🔗 You can share this workout by using the unique URL address at the top of this webpage"
         });
     }).catch((err) => {
         console.log('Promise rejected', err);
     })
 }
 
-/*
+exports.editEntry = function(req, res) {
+
+    db.getEntriesByID(id = req.params.id).then((list) => {
+        res.render('entries', {
+            'title': '🏋️Progress Tracking',
+            'entries': list,
+            "user": req.user,
+        });
+    }).catch((err) => {
+        console.log('Promise rejected', err);
+    })
+}
+
+
 exports.server_error = function(err, req, res, next) {
     res.status(500);
     res.type('text/plain');
     res.send('Error 500: Internal Server Error!');
 }
-*/
+
 exports.not_found = function(err, req, res, next) {
     res.status(404);
     res.type('text/plain');

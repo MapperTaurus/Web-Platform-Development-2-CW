@@ -29,6 +29,9 @@
                 <div class="card-text">
                 <i class="fa fa-calendar"></i> Scheduled for: {{date}}
             </div>
+                <div class="card-text">
+                <i class="fas fa-info-circle"></i></i> Current Status: {{status}}
+            </div>
             <div class="card-text">
                 <i class="fas fa-user"></i> Scheduled by <a href="/posts/{{user}}">{{user}} </a>, on {{published}}
             </div>
@@ -37,11 +40,16 @@
                 <a href='/share/{{_id}}'  alt='Edit this workout' style="color:#28a745"><i class="fas fa-share"></i></i> Share</a>‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎
                 <a href='/delete/{{_id}}'  alt='Delete this workout' style="color:#dc3545"><i class="fas fa-trash"></i> Delete</a>‎‎‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎
         </div>
+            <div style="color:#28a745; font-size:24px";>{{shareDisplay}}</div>
     </div>
         </br>
         </br>
         {{/entries}}
-        {{^entries}} No scheduled workouts yet. Why don't you add some? {{/entries}}
+        {{^entries}} 
+        </br>
+        </br>
+        </br><h2>No scheduled workouts yet. Why don't you add some?<h2> 
+        {{/entries}}
     {{/user}}
 </body>
 

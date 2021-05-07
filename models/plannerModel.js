@@ -21,6 +21,7 @@ class Schedule {
             goals: 'Judo push-up x5, Cable Pulldowns x10, Barbell Incline Press x15, Barbell Bent Over Row x15, Push Ups x20, Hip Thrust x10 ',
             achievements: 'Judo push-up x2, Cable Pulldowns x5, Barbell Incline Press x10, Barbell Bent Over Row x12, Push Ups x18, Hip Thrust x10',
             date: '2021-05-02',
+            status: '✅Completed',
             published: '2021-04-16',
             user: 'Martin'
         });
@@ -30,6 +31,7 @@ class Schedule {
             goals: 'Bench press x10, Bent-over row x5, Lat pull-down x15, One-arm cable press x10, Incline dumbbell flye x20',
             achievements: 'Bench press x8, Bent-over row x5, Lat pull-down x11, One-arm cable press x10, Incline dumbbell flye x12',
             date: '2021-05-06',
+            status: '⏰Scheduled',
             published: '2021-04-18',
             user: 'Vincent'
         });
@@ -39,6 +41,7 @@ class Schedule {
             goals: 'High knees x20, Butt kicks x20, Lateral shuffles x15, Speed skaters x15, Jumping jacks x20, Toe taps x10, Squat jumps x25',
             achievements: 'High knees x25, Butt kicks x25, Lateral shuffles x10, Speed skaters x5, Jumping jacks x20, Toe taps x10, Squat jumps x20',
             date: '2021-05-16',
+            status: '⏰Scheduled',
             published: '2021-04-24',
             user: 'Vincent'
         });
@@ -62,7 +65,7 @@ class Schedule {
         })
     }
 
-    addEntry(user, workout_title, goals, achievements, date) {
+    addEntry(user, workout_title, goals, achievements, date, status) {
 
         var entry = {
             user: user,
@@ -70,6 +73,7 @@ class Schedule {
             goals: goals,
             achievements: achievements,
             date: date,
+            status: status,
             published: new Date().toISOString().split('T')[0]
         }
 
@@ -78,7 +82,6 @@ class Schedule {
                 console.log('Error inserting document', workout_title);
             }
         })
-
     }
 
     getEntriesByUser(userName) {
