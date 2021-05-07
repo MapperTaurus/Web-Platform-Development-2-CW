@@ -51,6 +51,18 @@ exports.deleteEntry = function(req, res) {
     res.redirect('/')
 }
 
+exports.editEntry = function(req, res) {
+    db.getEntriesByID(id = req.params.id).then((list) => {
+        res.render('entries', {
+            'title': '🏋️Progress Tracking',
+            'entries': list,
+            "user": req.user
+        });
+    }).catch((err) => {
+        console.log('Promise rejected', err);
+    })
+}
+
 exports.landing_page = function(req, res) {
 
     db.getAllEntries().then((list) => {

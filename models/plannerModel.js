@@ -81,7 +81,6 @@ class Schedule {
 
     }
 
-
     getEntriesByUser(userName) {
         return new Promise((resolve, reject) => {
             this.db.find({ 'user': userName }, function(err, entries) {

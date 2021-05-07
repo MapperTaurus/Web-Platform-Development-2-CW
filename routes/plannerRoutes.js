@@ -33,6 +33,8 @@ router.post('/register', controller.post_new_user);
 
 router.get('/logout', controller.logout);
 
+router.get('/edit/:id', controller.editEntry);
+
 router.get('/delete/:id', controller.deleteEntry); 
 
 router.get('/share/:id', controller.shareEntry);
