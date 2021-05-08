@@ -45,7 +45,7 @@ class Schedule {
             published: '2021-04-24',
             user: 'Vincent'
         });
-}
+    }
 
     //return all entries from the database
     getAllEntries() {
@@ -53,7 +53,7 @@ class Schedule {
         return new Promise((resolve, reject) => {
             //use the find() function of the database to get the data, 
             //with error first callback function, err for error, entries for data
-            this.db.find({}, function(err, entries) {
+            this.db.find({}, function (err, entries) {
                 //if error occurs reject Promise
                 if (err) {
                     reject(err);
@@ -77,7 +77,7 @@ class Schedule {
             published: new Date().toISOString().split('T')[0]
         }
 
-        this.db.insert(entry, function(err, doc) {
+        this.db.insert(entry, function (err, doc) {
             if (err) {
                 console.log('Error inserting document', workout_title);
             }
@@ -86,7 +86,7 @@ class Schedule {
 
     getEntriesByUser(userName) {
         return new Promise((resolve, reject) => {
-            this.db.find({ 'user': userName }, function(err, entries) {
+            this.db.find({ 'user': userName }, function (err, entries) {
                 if (err) {
                     reject(err);
                 } else {
@@ -98,7 +98,7 @@ class Schedule {
 
     getEntriesByID(id) {
         return new Promise((resolve, reject) => {
-            this.db.find({ _id: id }, function(err, entries) {
+            this.db.find({ _id: id }, function (err, entries) {
                 if (err) {
                     reject(err);
                 } else {
@@ -109,14 +109,14 @@ class Schedule {
     }
 
     deleteEntry(id) {
-        this.db.remove({_id: id}, {}, function(err, rem) {
+        this.db.remove({ _id: id }, {}, function (err, rem) {
             if (err) {
-            console.log("Error: Could not delete the workout!", err);
+                console.log("Error: Could not delete the workout!", err);
             } else {
-            console.log("Workout deleted!");
+                console.log("Workout deleted!");
             }
-            })
-            } 
+        })
+    }
 }
 
 module.exports = Schedule;

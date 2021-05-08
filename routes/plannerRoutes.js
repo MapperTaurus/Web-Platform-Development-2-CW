@@ -4,7 +4,7 @@ const path = require('path');
 const pages = path.join(__dirname, `pages`);
 const auth = require('../auth/auth');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
-const controller = require ('../controllers/plannerControllers');
+const controller = require('../controllers/plannerControllers');
 
 
 router.use(express.static(pages));
@@ -19,7 +19,7 @@ router.post('/new', ensureLoggedIn('/login'), controller.post_new_entry);
 
 router.get('/posts/:user', controller.show_user_entries);
 
-router.get("/about", function(req, res) {
+router.get("/about", function (req, res) {
     res.sendFile(path.join(pages, '/about.html'));
 })
 
@@ -35,18 +35,18 @@ router.get('/logout', controller.logout);
 
 router.get('/edit/:id', controller.editEntry);
 
-router.get('/delete/:id', controller.deleteEntry); 
+router.get('/delete/:id', controller.deleteEntry);
 
 router.get('/share/:id', controller.shareEntry);
 
 
-router.use(function(req, res) {
+router.use(function (req, res) {
     res.status(404);
     res.type('text/plain');
     res.send('404 Not found.');
 })
 
-router.use(function(err, req, res, next) {
+router.use(function (err, req, res, next) {
     res.status(500);
     res.type('text/plain');
     res.send('Internal Server Error.');

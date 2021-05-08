@@ -15,12 +15,12 @@ class UserDAO {
 
     create(username, password) {
         const that = this;
-        bcrypt.hash(password, saltRounds).then(function(hash) {
+        bcrypt.hash(password, saltRounds).then(function (hash) {
             var entry = {
                 user: username,
                 password: hash,
             };
-            that.db.insert(entry, function(err) {
+            that.db.insert(entry, function (err) {
                 if (err) {
                     console.log("Can't insert user: ", username);
                 }
@@ -29,7 +29,7 @@ class UserDAO {
     }
 
     lookup(user, cb) {
-        this.db.find({ 'user': user }, function(err, entries) {
+        this.db.find({ 'user': user }, function (err, entries) {
             if (err) {
                 return cb(null, null);
             } else {
