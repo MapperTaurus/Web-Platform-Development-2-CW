@@ -13,7 +13,7 @@ exports.post_new_user = function(req, res) {
     const password = req.body.pass;
 
     if (!user || !password) {
-        res.status(401).send('no user or no password supplied');
+        res.status(401).send('Error: Please fill in the required fields');
         return;
     }
 
@@ -71,7 +71,7 @@ exports.landing_page = function(req, res) {
 
 exports.post_new_entry = function(req, res) 
 {
-    if (!req.body.workout_title && (!req.body.goals || req.body.achievements)) {
+    if (!req.body.status && (!req.body.goals || req.body.achievements)) {
         res.status(400).send("Error when submitting: Please fill in all the required fields!");
         return;
     }
