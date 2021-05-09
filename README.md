@@ -1,46 +1,39 @@
-git-download
+Web-based Activity Planner 
 ==================
 
-Downloads a remote git repository into a directory or into a `tar` file. Provides a wrapper around the `git archive` command, executing a command like this from node:
+Website, which allows the users to schedule, edit and share their own training routines. Using NeDB embedded database for user profiles and in-memory database for the scheduled workouts.
+The application is developed in a MVC pattern. The model contains the entire logic of the program (classes and their associated functions), the controller acts as a bridge between the view (user interface) and the model.
+The controller sorts each element of the logic with an identifier, this identifier is basically the name of the function used by the controller itself (e.g. exports.function_name).
+This function is then called from within the "route" file.
 
-```
-git archive --format=tar --remote=ssh://hostname/user/reponame.git branch:folder | tar xf -
-```
-
-**NOTE:** Github does not support `git archive`, so this package does not work with Github repos. This package can be used to download git repositories from private git servers as well as Atlassian Stash and Bitbucket. It may be enhanced to add github support in the future using a different download method.
+**Coursework for the module Web Platform Development 2 - M3I322955**
 
 # Installation
 
+Download the repository, install the required modules and run the application.
+
+Required commands for installation:
+
 ```
 npm install git-download --save
+npm install express
+npm install mustache-express
+npm install passport
+npm install nedb
 ```
 
 # Start-up
+
+After you have finished with the installation you can run the application with the following command:
 
 ```
 node index.js
 ```
 
-# Options
+The website can be accessed at **http://localhost:3000/** by default.
 
-`source: 'remote_git_repo'`: Location of remote git repository (github not supported since they don't support git archive)
+# Author
 
-`dest: '/local/path/to/project'`: Destination to explode contents of `tar` file
-
-`branch: 'master'`: Branch and folder path to include, such as `'master:lib'`
-
-`tarfile: '/tmp/project.tar'`: Location to save tarfile, defaults to `/tmp/` with a uuidv4 filename if not specified
-
-`savetar: true|false`: Removes tarfile if false, saves it if true
-
-`prefix: 'project/'`: Optional prefix to add to all root filesname in tarfile
-
-# Resources
-
-Resources for future enhancement inspirations:
-
-https://www.npmjs.org/package/github-download
-https://github.com/component/remotes.js/blob/master/lib/remotes/bitbucket.js
-http://stackoverflow.com/questions/9609835/git-export-from-github-remote-repository
-https://www.npmjs.org/package/git-download-archive
-https://www.npmjs.org/package/download-github-repo
+Name: **Ivan Todorov** 
+Student ID: **S1822426**
+Student Email: **ITODOR200@caledonian.ac.uk**
